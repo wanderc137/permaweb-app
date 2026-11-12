@@ -1,0 +1,197 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 840" width="1100" height="840" role="img" aria-labelledby="titulo desc">
+  <title id="titulo">Modelo de datos propuesto</title>
+  <desc id="desc">Diagrama entidad-relación con las tablas users, sessions, quotes, uploads, credit_ledger, audit_log y settings, sus claves y relaciones principales.</desc>
+
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1e"/>
+      <stop offset="1" stop-color="#0c1426"/>
+    </linearGradient>
+    <marker id="f3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5f7ba8"/>
+    </marker>
+    <marker id="f3c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/>
+    </marker>
+    <marker id="f3v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/>
+    </marker>
+    <filter id="sh3" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <rect width="1100" height="840" fill="url(#bg3)"/>
+  <g stroke="#141f38" stroke-width="1" opacity="0.6">
+    <path d="M0 100 H1100 M0 330 H1100 M0 600 H1100 M0 760 H1100"/>
+    <path d="M340 0 V840 M680 0 V840"/>
+  </g>
+
+  <text x="40" y="48" fill="#e6edf7" font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="700">Modelo de datos propuesto</text>
+  <text x="40" y="74" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13">PostgreSQL. Esquema de diseño: no existe migración ni archivo de modelo en el repositorio.</text>
+
+  <!-- USERS -->
+  <g filter="url(#sh3)">
+    <rect x="40" y="118" width="270" height="232" rx="10" fill="#0f1729" stroke="#2a3a5f"/>
+    <rect x="40" y="118" width="270" height="38" rx="10" fill="#123040"/>
+    <rect x="40" y="146" width="270" height="10" fill="#123040"/>
+  </g>
+  <text x="56" y="143" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700">users</text>
+  <text x="250" y="143" fill="#7f90ae" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" text-anchor="end">cuentas</text>
+  <text x="56" y="180" fill="#c8d4e8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    <tspan x="56" dy="0">id            uuid  PK</tspan>
+    <tspan x="56" dy="19">email         citext  UQ</tspan>
+    <tspan x="56" dy="19">password_hash text</tspan>
+    <tspan x="56" dy="19">role          user|admin</tspan>
+    <tspan x="56" dy="19">status        active|suspended</tspan>
+    <tspan x="56" dy="19">credits       int  (proyección)</tspan>
+    <tspan x="56" dy="19">token_version int</tspan>
+    <tspan x="56" dy="19">created_at    timestamptz</tspan>
+    <tspan x="56" dy="19">updated_at    timestamptz</tspan>
+  </text>
+
+  <!-- SESSIONS -->
+  <g filter="url(#sh3)">
+    <rect x="40" y="432" width="270" height="170" rx="10" fill="#0f1729" stroke="#2a3a5f"/>
+    <rect x="40" y="432" width="270" height="38" rx="10" fill="#123040"/>
+    <rect x="40" y="460" width="270" height="10" fill="#123040"/>
+  </g>
+  <text x="56" y="457" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700">sessions</text>
+  <text x="250" y="457" fill="#7f90ae" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" text-anchor="end">revocables</text>
+  <text x="56" y="494" fill="#c8d4e8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    <tspan x="56" dy="0">id         uuid  PK</tspan>
+    <tspan x="56" dy="19">user_id    uuid  FK → users</tspan>
+    <tspan x="56" dy="19">token_hash text  UQ</tspan>
+    <tspan x="56" dy="19">expires_at timestamptz</tspan>
+    <tspan x="56" dy="19">ip         inet</tspan>
+    <tspan x="56" dy="19">user_agent text</tspan>
+  </text>
+
+  <!-- QUOTES -->
+  <g filter="url(#sh3)">
+    <rect x="360" y="118" width="280" height="172" rx="10" fill="#0f1729" stroke="#2a3a5f"/>
+    <rect x="360" y="118" width="280" height="38" rx="10" fill="#131c36"/>
+    <rect x="360" y="146" width="280" height="10" fill="#131c36"/>
+  </g>
+  <text x="376" y="143" fill="#a78bfa" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700">quotes</text>
+  <text x="624" y="143" fill="#7f90ae" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" text-anchor="end">precio con vencimiento</text>
+  <text x="376" y="180" fill="#c8d4e8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    <tspan x="376" dy="0">id              uuid  PK</tspan>
+    <tspan x="376" dy="19">user_id         uuid  FK → users</tspan>
+    <tspan x="376" dy="19">size_bytes      bigint</tspan>
+    <tspan x="376" dy="19">content_type    text</tspan>
+    <tspan x="376" dy="19">price_credits   int</tspan>
+    <tspan x="376" dy="19">pricing_version text</tspan>
+    <tspan x="376" dy="19">expires_at      timestamptz</tspan>
+    <tspan x="376" dy="19">consumed_at     timestamptz NULL</tspan>
+  </text>
+
+  <!-- UPLOADS -->
+  <g filter="url(#sh3)">
+    <rect x="360" y="360" width="280" height="272" rx="10" fill="#0f1729" stroke="#2f4a78"/>
+    <rect x="360" y="360" width="280" height="38" rx="10" fill="#12294a"/>
+    <rect x="360" y="388" width="280" height="10" fill="#12294a"/>
+  </g>
+  <text x="376" y="385" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700">uploads</text>
+  <text x="624" y="385" fill="#7f90ae" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" text-anchor="end">núcleo del dominio</text>
+  <text x="376" y="422" fill="#c8d4e8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    <tspan x="376" dy="0">id           uuid  PK</tspan>
+    <tspan x="376" dy="19">user_id      uuid  FK → users</tspan>
+    <tspan x="376" dy="19">quote_id     uuid  FK → quotes</tspan>
+    <tspan x="376" dy="19">slug         text  UQ</tspan>
+    <tspan x="376" dy="19">file_name    text</tspan>
+    <tspan x="376" dy="19">content_type text</tspan>
+    <tspan x="376" dy="19">size_bytes   bigint</tspan>
+    <tspan x="376" dy="19">sha256       text</tspan>
+    <tspan x="376" dy="19">txid         text  NULL</tspan>
+    <tspan x="376" dy="19">status       enum</tspan>
+    <tspan x="376" dy="19">error_code   text  NULL</tspan>
+    <tspan x="376" dy="19">created_at   timestamptz</tspan>
+    <tspan x="376" dy="19">confirmed_at timestamptz NULL</tspan>
+  </text>
+
+  <!-- CREDIT_LEDGER -->
+  <g filter="url(#sh3)">
+    <rect x="700" y="118" width="330" height="250" rx="10" fill="#0f1729" stroke="#2a3a5f"/>
+    <rect x="700" y="118" width="330" height="38" rx="10" fill="#0e2a22"/>
+    <rect x="700" y="146" width="330" height="10" fill="#0e2a22"/>
+  </g>
+  <text x="716" y="143" fill="#34d399" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700">credit_ledger</text>
+  <text x="1014" y="143" fill="#7f90ae" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" text-anchor="end">fuente de verdad</text>
+  <text x="716" y="180" fill="#c8d4e8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    <tspan x="716" dy="0">id                bigserial  PK</tspan>
+    <tspan x="716" dy="19">user_id           uuid  FK → users</tspan>
+    <tspan x="716" dy="19">upload_id         uuid  FK NULL</tspan>
+    <tspan x="716" dy="19">kind              grant|debit|refund|adjust</tspan>
+    <tspan x="716" dy="19">amount            int  (con signo)</tspan>
+    <tspan x="716" dy="19">balance_after     int</tspan>
+    <tspan x="716" dy="19">idempotency_key   text  UQ</tspan>
+    <tspan x="716" dy="19">reason            text</tspan>
+    <tspan x="716" dy="19">actor_id          uuid  NULL</tspan>
+    <tspan x="716" dy="19">created_at        timestamptz</tspan>
+  </text>
+
+  <!-- AUDIT_LOG -->
+  <g filter="url(#sh3)">
+    <rect x="700" y="412" width="330" height="190" rx="10" fill="#0f1729" stroke="#2a3a5f"/>
+    <rect x="700" y="412" width="330" height="38" rx="10" fill="#241a12"/>
+    <rect x="700" y="440" width="330" height="10" fill="#241a12"/>
+  </g>
+  <text x="716" y="437" fill="#fbbf24" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700">audit_log</text>
+  <text x="1014" y="437" fill="#7f90ae" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" text-anchor="end">append-only</text>
+  <text x="716" y="474" fill="#c8d4e8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    <tspan x="716" dy="0">id          bigserial  PK</tspan>
+    <tspan x="716" dy="19">actor_id    uuid  NULL</tspan>
+    <tspan x="716" dy="19">action      text</tspan>
+    <tspan x="716" dy="19">target_type text</tspan>
+    <tspan x="716" dy="19">target_id   text</tspan>
+    <tspan x="716" dy="19">ip          inet</tspan>
+    <tspan x="716" dy="19">metadata    jsonb  (sin PII)</tspan>
+  </text>
+
+  <!-- SETTINGS -->
+  <g filter="url(#sh3)">
+    <rect x="700" y="640" width="330" height="120" rx="10" fill="#0f1729" stroke="#2a3a5f"/>
+    <rect x="700" y="640" width="330" height="38" rx="10" fill="#1b1b2e"/>
+    <rect x="700" y="668" width="330" height="10" fill="#1b1b2e"/>
+  </g>
+  <text x="716" y="665" fill="#c4b5fd" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700">settings</text>
+  <text x="1014" y="665" fill="#7f90ae" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" text-anchor="end">clave-valor versionado</text>
+  <text x="716" y="702" fill="#c8d4e8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11">
+    <tspan x="716" dy="0">key        text  PK</tspan>
+    <tspan x="716" dy="19">value      jsonb</tspan>
+    <tspan x="716" dy="19">updated_at timestamptz</tspan>
+  </text>
+
+  <!-- RELACIONES -->
+  <g fill="none" stroke-width="1.8">
+    <path d="M175 350 L175 424" stroke="#22d3ee" marker-end="url(#f3c)"/>
+    <path d="M310 180 L352 180" stroke="#a78bfa" marker-end="url(#f3v)"/>
+    <path d="M500 290 L500 352" stroke="#a78bfa" marker-end="url(#f3v)"/>
+    <path d="M310 250 C332 250 332 420 352 420" stroke="#22d3ee" marker-end="url(#f3c)"/>
+    <path d="M640 500 C672 500 672 330 692 318" stroke="#34d399" marker-end="url(#f3)"/>
+    <path d="M175 118 L175 78 L865 78 L865 110" stroke="#34d399" marker-end="url(#f3)"/>
+    <path d="M640 600 C672 600 672 520 692 512" stroke="#fbbf24" stroke-dasharray="5 4" marker-end="url(#f3)"/>
+  </g>
+
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="10">
+    <text x="184" y="386" fill="#22d3ee">1:N</text>
+    <text x="318" y="172" fill="#a78bfa">1:N</text>
+    <text x="508" y="322" fill="#a78bfa">1:1</text>
+    <text x="320" y="300" fill="#22d3ee">1:N</text>
+    <text x="648" y="420" fill="#34d399">1:N</text>
+    <text x="500" y="70" fill="#34d399">users.id → credit_ledger.user_id (1:N)</text>
+    <text x="648" y="640" fill="#fbbf24">referencia lógica</text>
+  </g>
+
+  <!-- NOTAS -->
+  <rect x="40" y="640" width="600" height="120" rx="10" fill="#101a2e" stroke="#2a3a5f" stroke-dasharray="6 5"/>
+  <text x="58" y="666" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="1.2">REGLAS DEL MODELO</text>
+  <text x="58" y="690" fill="#c8d4e8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">· El ledger es la fuente de verdad del saldo; users.credits es una proyección.</text>
+  <text x="58" y="710" fill="#c8d4e8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">· Un reembolso por subida: índice único (upload_id, kind) para kind='refund'.</text>
+  <text x="58" y="730" fill="#c8d4e8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">· slug UNIQUE y opaco; el txid no se usa como identificador público.</text>
+  <text x="58" y="750" fill="#7f90ae" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10">Sin migraciones ni esquema real: esta es una propuesta sujeta a revisión.</text>
+
+  <text x="40" y="806" fill="#5f7ba8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10">docs/assets/modelo-datos.svg · tema oscuro · sin dependencias externas</text>
+  <text x="40" y="824" fill="#5f7ba8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10">Cardinalidades abreviadas: PK clave primaria · FK clave foránea · UQ único · NULL opcional.</text>
+</svg>

@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 780" width="1100" height="780" role="img" aria-labelledby="titulo desc">
+  <title id="titulo">Flujo previsto de subida y descarga</title>
+  <desc id="desc">Dos secuencias: publicar un archivo (autenticación, cotización, débito de créditos, transferencia, confirmación y entrega de enlace con QR) y recuperarlo (slug o QR, ficha, descarga y gateway Arweave).</desc>
+
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0f1e"/>
+      <stop offset="1" stop-color="#0d1529"/>
+    </linearGradient>
+    <marker id="f2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3f5a86"/>
+    </marker>
+  </defs>
+
+  <rect width="1100" height="780" fill="url(#bg2)"/>
+  <g stroke="#141f38" stroke-width="1" opacity="0.7">
+    <path d="M550 110 V640"/>
+  </g>
+
+  <text x="48" y="52" fill="#e6edf7" font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="700">Flujo de subida y descarga</text>
+  <text x="48" y="78" fill="#93a4c3" font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13">Secuencia prevista. Los contratos exactos están en docs/developer.md; los estados, en docs/datasheet.md.</text>
+
+  <!-- ================= SUBIDA ================= -->
+  <rect x="40" y="104" width="480" height="36" rx="8" fill="#0f2a33" stroke="#1c5a66"/>
+  <text x="60" y="128" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="1">SUBIDA · publicación</text>
+
+  <!-- paso 1 -->
+  <circle cx="72" cy="176" r="14" fill="#16223f" stroke="#22d3ee"/>
+  <text x="72" y="181" text-anchor="middle" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">1</text>
+  <text x="98" y="172" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">Autenticación y selección</text>
+  <text x="98" y="190" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Cookie httpOnly · tamaño y MIME validados en cliente y servidor</text>
+
+  <!-- paso 2 -->
+  <circle cx="72" cy="238" r="14" fill="#16223f" stroke="#22d3ee"/>
+  <text x="72" y="243" text-anchor="middle" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">2</text>
+  <text x="98" y="234" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">POST /api/quote</text>
+  <text x="98" y="252" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">{fileName, sizeBytes, contentType} → {quoteId, priceCredits, expiresAt}</text>
+
+  <!-- paso 3 -->
+  <circle cx="72" cy="300" r="14" fill="#16223f" stroke="#22d3ee"/>
+  <text x="72" y="305" text-anchor="middle" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">3</text>
+  <text x="98" y="296" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">Reserva de créditos</text>
+  <text x="98" y="314" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Débito transaccional + idempotency key → estado reserved</text>
+
+  <!-- paso 4 -->
+  <circle cx="72" cy="362" r="14" fill="#16223f" stroke="#22d3ee"/>
+  <text x="72" y="367" text-anchor="middle" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">4</text>
+  <text x="98" y="358" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">Transferencia de bytes</text>
+  <text x="98" y="376" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">URL firmada o multipart · timeout, reintentos y cancelación</text>
+
+  <!-- paso 5 -->
+  <circle cx="72" cy="424" r="14" fill="#16223f" stroke="#22d3ee"/>
+  <text x="72" y="429" text-anchor="middle" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">5</text>
+  <text x="98" y="420" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">Publicación en el bundler</text>
+  <text x="98" y="438" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Firma con la wallet operativa → estado processing</text>
+
+  <!-- paso 6 -->
+  <circle cx="72" cy="486" r="14" fill="#16223f" stroke="#22d3ee"/>
+  <text x="72" y="491" text-anchor="middle" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">6</text>
+  <text x="98" y="482" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">Verificación y confirmación</text>
+  <text x="98" y="500" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">txid + sha256 + tamaño · slug generado · estado confirmed</text>
+
+  <!-- paso 7 -->
+  <circle cx="72" cy="548" r="14" fill="#16223f" stroke="#34d399"/>
+  <text x="72" y="553" text-anchor="middle" fill="#34d399" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">7</text>
+  <text x="98" y="544" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">Entrega</text>
+  <text x="98" y="562" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Enlace /f/&lt;slug&gt;, QR descargable y fila en el historial</text>
+
+  <g stroke="#3f5a86" stroke-width="1.6" marker-end="url(#f2)">
+    <line x1="72" y1="192" x2="72" y2="220"/>
+    <line x1="72" y1="254" x2="72" y2="282"/>
+    <line x1="72" y1="316" x2="72" y2="344"/>
+    <line x1="72" y1="378" x2="72" y2="406"/>
+    <line x1="72" y1="440" x2="72" y2="468"/>
+    <line x1="72" y1="502" x2="72" y2="530"/>
+  </g>
+
+  <!-- rama de fallo -->
+  <g>
+    <rect x="300" y="596" width="220" height="88" rx="8" fill="#1d1220" stroke="#7a3b4a" stroke-dasharray="5 4"/>
+    <text x="314" y="618" fill="#fda4af" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="700">FALLO O CANCELACIÓN</text>
+    <text x="314" y="638" fill="#c9b3bb" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">failed / expired → refunded</text>
+    <text x="314" y="656" fill="#c9b3bb" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Reembolso único por upload</text>
+    <text x="314" y="674" fill="#a98b96" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10">Índice único (upload_id, kind)</text>
+  </g>
+  <path d="M86 424 C160 424 210 560 296 620" fill="none" stroke="#7a3b4a" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#f2)"/>
+
+  <!-- ================= DESCARGA ================= -->
+  <rect x="580" y="104" width="480" height="36" rx="8" fill="#1a1533" stroke="#4c3a86"/>
+  <text x="600" y="128" fill="#a78bfa" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="1">DESCARGA · recuperación</text>
+
+  <circle cx="612" cy="176" r="14" fill="#16223f" stroke="#a78bfa"/>
+  <text x="612" y="181" text-anchor="middle" fill="#a78bfa" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">1</text>
+  <text x="638" y="172" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">Abrir enlace o escanear QR</text>
+  <text x="638" y="190" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">/f/&lt;slug&gt; (ficha) o /v/&lt;slug&gt; (visor)</text>
+
+  <circle cx="612" cy="238" r="14" fill="#16223f" stroke="#a78bfa"/>
+  <text x="612" y="243" text-anchor="middle" fill="#a78bfa" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">2</text>
+  <text x="638" y="234" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">Resolver slug</text>
+  <text x="638" y="252" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Validar ^[a-z0-9]{8,32}$ · visibilidad y estado confirmed</text>
+
+  <circle cx="612" cy="300" r="14" fill="#16223f" stroke="#a78bfa"/>
+  <text x="612" y="305" text-anchor="middle" fill="#a78bfa" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">3</text>
+  <text x="638" y="296" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">Ficha con metadatos</text>
+  <text x="638" y="314" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Nombre, tamaño, fecha, hash, txid y QR</text>
+
+  <circle cx="612" cy="362" r="14" fill="#16223f" stroke="#a78bfa"/>
+  <text x="612" y="367" text-anchor="middle" fill="#a78bfa" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">4</text>
+  <text x="638" y="358" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">GET /api/download/[slug]</text>
+  <text x="638" y="376" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">302 al gateway o stream con Content-Disposition</text>
+
+  <circle cx="612" cy="424" r="14" fill="#16223f" stroke="#34d399"/>
+  <text x="612" y="429" text-anchor="middle" fill="#34d399" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700">5</text>
+  <text x="638" y="420" fill="#e6edf7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600">Gateway entrega los bytes</text>
+  <text x="638" y="438" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">El txid es verificable por cualquiera, sin depender de la app</text>
+
+  <g stroke="#3f5a86" stroke-width="1.6" marker-end="url(#f2)">
+    <line x1="612" y1="192" x2="612" y2="220"/>
+    <line x1="612" y1="254" x2="612" y2="282"/>
+    <line x1="612" y1="316" x2="612" y2="344"/>
+    <line x1="612" y1="378" x2="612" y2="406"/>
+  </g>
+
+  <!-- invariantes -->
+  <g>
+    <rect x="580" y="480" width="480" height="204" rx="10" fill="#101a2e" stroke="#2a3a5f"/>
+    <text x="600" y="504" fill="#22d3ee" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="1.2">INVARIANTES DEL DISEÑO</text>
+    <text x="600" y="528" fill="#c8d4e8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12">· El contenido confirmado no se puede borrar ni editar.</text>
+    <text x="600" y="548" fill="#c8d4e8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12">· El saldo se debita antes de transferir y se reembolsa una sola vez.</text>
+    <text x="600" y="568" fill="#c8d4e8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12">· La cotización vence: nunca se sube con un precio viejo.</text>
+    <text x="600" y="588" fill="#c8d4e8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12">· El slug es opaco y no revela el txid ni el propietario.</text>
+    <text x="600" y="608" fill="#c8d4e8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12">· Ocultar en la app no elimina el contenido del gateway.</text>
+    <text x="600" y="634" fill="#7f90ae" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Ningún paso está implementado: no existe código en el repositorio.</text>
+    <text x="600" y="656" fill="#7f90ae" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Los tiempos, límites y precios quedan sin definir a propósito.</text>
+  </g>
+
+  <!-- estados -->
+  <g>
+    <text x="48" y="722" fill="#93a4c3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Estados de una subida:</text>
+  </g>
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="10">
+    <rect x="200" y="708" width="94" height="22" rx="11" fill="#0f2a33" stroke="#1c5a66"/>
+    <text x="247" y="723" text-anchor="middle" fill="#22d3ee">quoted</text>
+    <rect x="304" y="708" width="100" height="22" rx="11" fill="#0f2a33" stroke="#1c5a66"/>
+    <text x="354" y="723" text-anchor="middle" fill="#22d3ee">reserved</text>
+    <rect x="414" y="708" width="104" height="22" rx="11" fill="#0f2a33" stroke="#1c5a66"/>
+    <text x="466" y="723" text-anchor="middle" fill="#22d3ee">uploading</text>
+    <rect x="528" y="708" width="108" height="22" rx="11" fill="#161033" stroke="#4c3a86"/>
+    <text x="582" y="723" text-anchor="middle" fill="#c4b5fd">processing</text>
+    <rect x="646" y="708" width="106" height="22" rx="11" fill="#0e2a22" stroke="#1f6b52"/>
+    <text x="699" y="723" text-anchor="middle" fill="#34d399">confirmed</text>
+    <rect x="762" y="708" width="96" height="22" rx="11" fill="#1d1220" stroke="#7a3b4a"/>
+    <text x="810" y="723" text-anchor="middle" fill="#fda4af">failed</text>
+    <rect x="868" y="708" width="96" height="22" rx="11" fill="#1d1220" stroke="#7a3b4a"/>
+    <text x="916" y="723" text-anchor="middle" fill="#fda4af">refunded</text>
+  </g>
+
+  <text x="48" y="766" fill="#5f7ba8" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10">docs/assets/flujo-subida-descarga.svg · tema oscuro · sin dependencias externas</text>
+</svg>

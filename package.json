@@ -1,0 +1,37 @@
+{
+  "name": "permaweb-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "db:init": "node scripts/init-db.mjs",
+    "grant": "node scripts/grant.mjs",
+    "admin": "node scripts/admin.mjs",
+    "balance": "node scripts/balance.mjs",
+    "dev:db": "node scripts/dev-db.mjs",
+    "wallet": "node scripts/wallet.mjs"
+  },
+  "dependencies": {
+    "arweave": "^1.15.7",
+    "dotenv": "^17.2.3",
+    "jose": "^6.2.14",
+    "next": "16.4.3",
+    "pg": "^8.23.1",
+    "qrcode": "^1.5.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "latest",
+    "@electric-sql/pglite-socket": "latest",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.15.0",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.9.0"
+  }
+}
