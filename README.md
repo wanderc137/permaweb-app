@@ -483,3 +483,55 @@ Copyright (c) 2026 wanderc137
 *Este README describe una intención de arquitectura, no un sistema en funcionamiento.*
 
 </div>
+
+## Ficha de evaluación
+
+**Madurez global: 3.3/5**
+
+| Criterio | Nota | Evidencia |
+|---|---:|---|
+| Madurez | 3/5 | Build de producción y typecheck correctos, 79 archivos, sesiones de 12 h con 30 min de inactividad y ledger de saldo; sin suite de tests automatizados citada. |
+| Reproducibilidad | 2/5 | start.sh apunta a una ruta local concreta y exige PostgreSQL, credencial de publicación con saldo en Arweave y secretos; no hay Docker ni compose en la copia. |
+| Documentación | 4/5 | README de 30 KB, ESTADO-PROYECTO.md de 5,8 KB, datasheet de 17 KB, developer de 27 KB y bitácora; el README de diseño quedó desfasado y se corrigió con una nota de alcance. |
+| Honestidad de límites | 5/5 | Lista de 7 pasos antes de exponer a Internet, aclaración de que la etiqueta es pública y advertencia de que suspender no retira contenido permanente. |
+| Valor demostrativo | 4/5 | Cotización firmada con TTL, reserva transaccional de saldo y etiqueta, devolución solo ante fallo definitivo y QR de 360 × 360 por publicación confirmada. |
+| Facilidad de despliegue | 2/5 | start.sh/stop.sh y npm run db:init funcionan en el equipo del autor, pero dependen de wallet, saldo y una base PostgreSQL ya migrada. |
+
+Sirve como diseño e implementación de referencia para publicar contenido permanente con metadatos relacionales y cobro por créditos. La limitación que más pesa es que el camino de publicación nueva no está verificado y el despliegue depende de una wallet con saldo.
+
+## Lo que no funcionó
+
+### etapa scaffold — Un scaffold vacío documentado como proyecto
+
+La carpeta tenía 0 archivos de código, 85 paquetes en node_modules todos vacíos y ningún package.json ni tsconfig. Se decidió documentar el estado en la primera línea del README en lugar de crear un esqueleto que diera falsa impresión de avance.
+
+### etapa documentación — Incidente de sincronización con MEGA
+
+El cliente de sincronización renombró el README a README(1).md y luego a README(1)(1).md tras escrituras rápidas sobre el mismo archivo. Se pasó a trabajar en /tmp y copiar una sola vez, y se añadió README(*).md al .gitignore.
+
+### PermaDrop · cierre — El README de diseño quedó desfasado respecto al código
+
+El texto se escribió sobre un scaffold y durante su redacción apareció una implementación de 79 archivos que resolvía por su cuenta proveedor, ORM y sesiones. Se agregó ESTADO-PROYECTO.md y la regla de que, donde el código y el diseño difieran, prevalece el código.
+
+### PermaDrop · verificación — Las pruebas finales no ejercitaron una subida nueva
+
+Para evitar costes reales de Arweave, la verificación usó archivos históricos confirmados para ficha, contenido y QR. El camino completo de publicación nueva queda declarado como no verificado end-to-end en la copia.
+
+## Preguntas típicas
+
+**¿Qué es PermaDrop?**
+
+Una aplicación Next.js y PostgreSQL que sube archivos a Arweave, guarda los metadatos en base de datos y entrega una etiqueta corta, una ficha pública, descarga y QR.
+
+**¿Borra los archivos si se suspende la cuenta?**
+
+No. El contenido confirmado en Arweave es permanente; la suspensión impide nuevas operaciones, pero la etiqueta sigue resolviendo contenido público.
+
+**¿Cómo se ejecuta?**
+
+Con PostgreSQL inicializado por npm run db:init, variables de entorno y ./start.sh en el puerto 3000; la publicación real requiere una credencial con saldo en Arweave.
+
+**¿Qué se puede reutilizar?**
+
+La separación entre contenido inmutable y metadatos mutables, la cotización firmada con caducidad y la idempotencia de ajustes y devoluciones en el ledger.
+
