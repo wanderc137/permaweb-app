@@ -291,7 +291,8 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.08);pa
 @media(max-width:760px){.concept-grid,.fail-grid{grid-template-columns:1fr}.concept-side{border-left:0;padding-left:0}}
 
 </style>
-<link href="assets/community.css?v=5" rel="stylesheet"/></head>
+<link href="assets/community.css?v=5" rel="stylesheet"/><link href="rec/player.css?v=1" rel="stylesheet"/>
+</head>
 <body style="--accent:#9B8CFF;--accent2:#22D3EE">
 <div class="grid-overlay"></div>
 <div class="glow one"></div>
@@ -306,6 +307,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.08);pa
 <a href="#problema">Visión</a>
 <a href="#como">Cómo funciona</a>
 <a href="#arquitectura">Arquitectura</a>
+<a href="#video">Video</a>
 <a href="#docs">Documentación</a>
 <a href="#comunidad">Comunidad</a>
 <a class="btn btn-ghost" href="https://github.com/wanderc137/permaweb-app" rel="noopener" style="padding:9px 15px" target="_blank">GitHub</a>
@@ -356,6 +358,45 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.08);pa
 <div class="timeline reveal"><div class="step"><div class="step-num">01</div><div class="step-body"><h3>Cotizar</h3><p>El usuario elige un archivo y recibe el costo estimado de publicarlo para siempre.</p></div></div><div class="step"><div class="step-num">02</div><div class="step-body"><h3>Subir</h3><p>La API sube el contenido a la capa de almacenamiento permanente y confirma el recibo.</p></div></div><div class="step"><div class="step-num">03</div><div class="step-body"><h3>Compartir</h3><p>El sistema genera un slug, una URL estable y un QR para abrir o descargar.</p></div></div><div class="step"><div class="step-num">04</div><div class="step-body"><h3>Administrar</h3><p>El panel lista archivos, usuarios y estados; el historial muestra cada publicación.</p></div></div></div>
 </div>
 </section>
+
+<section class="section tight rec-section" id="video" style="--accent:#2E7DFF;--accent2:#14F195">
+<div class="wrap">
+<div class="rec-kicker">REC · VIDEO · 2:58</div>
+<h2 class="rec-h2">PermaDrop · publicar para siempre, cobrar una vez</h2>
+<p class="rec-lead">Recorrido por el flujo real de PermaDrop: modelo de datos, precio en CLP, cotización firmada, reserva transaccional de créditos, publicación L1 en Arweave, reembolso, QR y entrega del contenido.</p>
+<div class="rec-banner">
+<span class="rec-banner-icon">📋</span>
+<strong>Puedes copiar y pegar los comandos del video desde el video !!!</strong>
+<span>Pausá, seleccioná el texto de la terminal y copiá.</span>
+</div>
+<div class="rec-shell">
+<div class="rec-bar"><i></i><i></i><i></i><span class="rec-title">PermaDrop · publicar para siempre, cobrar una vez · asciinema</span><span class="rec-rec"><b></b>REC</span></div>
+<div class="rec-screen-wrap">
+<div class="rec-screen" id="rec-screen"></div>
+<div class="rec-poster" id="rec-poster">
+<div class="rec-kicker">ASCIINEMA · 2:58</div>
+<h3>PermaDrop · publicar para siempre, cobrar una vez</h3>
+<p>Recorrido por el flujo real de PermaDrop: modelo de datos, precio en CLP, cotización firmada, reserva transaccional de créditos, publicación L1 en Arweave, reembolso, QR y entrega del contenido.</p>
+<div class="rec-poster-meta">permaweb-app · código real</div>
+<button class="rec-btn rec-primary" id="rec-start" type="button">▶ Reproducir</button>
+</div>
+</div>
+<div class="rec-controls">
+<button class="rec-btn rec-primary" id="rec-play" type="button">▶ Reproducir</button>
+<button class="rec-btn" id="rec-restart" type="button">↺ Reiniciar</button>
+<input class="rec-progress" id="rec-range" type="range" min="0" max="1000" value="0" aria-label="Progreso"/>
+<span class="rec-time" id="rec-time">0:00 / 2:58</span>
+<select class="rec-speed" id="rec-speed" aria-label="Velocidad"><option value="1">1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select>
+<button class="rec-btn" id="rec-full" type="button" title="Pantalla completa">⛶</button>
+<button class="rec-btn" id="rec-copy" type="button">⧉ Copiar comandos</button>
+<a class="rec-download" href="rec/permaweb-app.cast" download>descargar .cast</a>
+</div>
+</div>
+<p class="rec-note">Los fragmentos corresponden al código real del repositorio. No se muestran claves de Arweave, AUTH_SECRET ni cadenas de conexión; la publicación real requiere una wallet financiada y un gateway disponible.</p>
+<div class="rec-chapters"><span class="rec-chip"><b>0:06</b> EL PROBLEMA</span><span class="rec-chip"><b>0:19</b> DOS CAPAS</span><span class="rec-chip"><b>0:32</b> COTIZACIÓN</span><span class="rec-chip"><b>0:46</b> QUOTE FIRMADO</span><span class="rec-chip"><b>1:00</b> RESERVA</span><span class="rec-chip"><b>1:14</b> PUBLICACIÓN</span><span class="rec-chip"><b>1:28</b> REEMBOLSO</span><span class="rec-chip"><b>1:44</b> SLUG Y QR</span><span class="rec-chip"><b>1:56</b> ENTREGA</span><span class="rec-chip"><b>2:10</b> SESIÓN</span><span class="rec-chip"><b>2:25</b> LÍMITES</span><span class="rec-chip"><b>2:36</b> CÓMO EJECUTARLO</span></div>
+</div>
+</section>
+
 <section class="section tight" id="arquitectura">
 <div class="wrap">
 <div class="section-head reveal">
@@ -466,5 +507,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.08);pa
 </script>
 <script>window.PORTFOLIO_COMMUNITY = {"account": "wanderc137", "repo": "permaweb-app", "coinNamespace": "wanderc137-permaweb-app-coins-v1", "faqs": [{"q": "¿Qué es?", "a": "Diseño de <b>PermaDrop</b>: publicar archivos permanentes en Arweave con enlace corto y QR."}, {"q": "¿Ya está implementado?", "a": "El repositorio documenta el diseño y un scaffold; no es un manual de implementación completo."}, {"q": "¿Cómo se paga?", "a": "Con créditos internos; la compra con dinero real es una decisión abierta."}, {"q": "¿Dónde se guardan los archivos?", "a": "En Arweave, vía un bundler de terceros (Irys/Turbo); los metadatos van en PostgreSQL."}, {"q": "¿Cuáles son los límites?", "a": "Sin contratos propios, sin pasarela de pago y sin métricas/SLA; el estado real está en <code>ESTADO-PROYECTO.md</code>."}]};</script>
 <script defer="" src="assets/community.js?v=6"></script>
+<script defer src="rec/permaweb-app.cast.js?v=1"></script>
+<script defer src="rec/player.js?v=1"></script>
 </body>
 </html>
